@@ -23,7 +23,10 @@ class NotaController extends Controller
         $notasDelUsuarioAutenticado = Auth::user()->notas;
         return NotaResource::collection($notasDelUsuarioAutenticado);*/
 
-        return NotaResource::collection(Nota::paginate(20));
+        $gruposDelUsuarioAutenticado = Auth::user()->grupos;
+        return NotaResource::collection($gruposDelUsuarioAutenticado);
+
+        //return NotaResource::collection(Nota::paginate(20));
     }
 
     public function sacarMedia($materia_id) {
