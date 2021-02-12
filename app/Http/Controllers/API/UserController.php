@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Materia;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Resources\MateriaResource;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Http;
 
-class MateriaController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        return MateriaResource::collection(Materia::paginate());
+        return UserResource::collection(User::paginate());
     }
 
     /**
@@ -27,48 +28,47 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-        $materia = json_decode($request->getContent(), true);
+        $user = json_decode($request->getContent(), true);
 
-        $materia = Materia::create($materia);
+        $user = User::create($user);
 
-        return new MateriaResource($materia);
+        return new UserResource($user);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Materia  $materia
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Materia $materia)
+    public function show(User $user)
     {
-        return new MateriaResource($materia);
+        return new UserResource($user);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Materia  $materia
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Materia $materia)
+    public function update(Request $request, User $user)
     {
-        $materiaData = json_decode($request->getContent(), true);
-        $materia->update($materiaData);
+        $userData = json_decode($request->getContent(), true);
+        $user->update($userData);
 
-        return new MateriaResource($materia);
+        return new UserResource($user);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Materia  $materia
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Materia $materia)
+    public function destroy(User $user)
     {
-        $materia->delete();
+        $user->delete();
     }
-
 }

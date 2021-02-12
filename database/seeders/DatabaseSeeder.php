@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
     	User::truncate();
     	Grupo::truncate();
     	Matricula::truncate();
@@ -26,6 +27,10 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()
             ->has(Grupo::factory()->count(3))
             ->create();
+
+        $this->call([
+            NotaSeeder::class,
+        ]);
     }
 
 }

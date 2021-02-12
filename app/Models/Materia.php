@@ -12,4 +12,14 @@ class Materia extends Model
     protected $fillable = [
         'nombre',
     ];
+
+    /**
+    *  Las notas de una determinada materia
+    **/
+    public function notas() {
+
+        return $this->hasMany(Nota::class, 'materia_id');
+
+    }
+
 }
